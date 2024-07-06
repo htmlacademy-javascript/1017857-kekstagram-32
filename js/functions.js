@@ -39,11 +39,40 @@ const getNumber = (value) => {
   return parseInt(result, 10);
 };
 
-const isInWorkingTime = (startWorkTime, endWorkTime, startEventTime, duration) => {
-  const startWorkTimeHours = parseInt(startWorkTime.split(':')[0], 10);
-  const startWorkTimeMinutes = parseInt(startWorkTime.split(':')[1], 10);
-  const endWorkTimeHours = parseInt(endWorkTime.split(':')[0], 10);
-  const endWorkTimeMinutes = parseInt(endWorkTime.split(':')[1], 10);
-  const startEventTimeHours = parseInt(startEventTime.split(':')[0], 10);
-  const startEventTimeMinutes = parseInt(startEventTime.split(':')[1], 10);
+
+/**
+ * Функция для преобразования времени в минуты.
+ * @param {string} time - время в формате HH:MM
+ * @return {*} - результат преобразования времени в минуты
+ */
+const timeToMinutes = (time) => {
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes;
 };
+
+
+/**
+ * Функция проверяет, входит ли встреча в рабочий день
+ * @param {string} startOfDay - время начала рабочего дня в формате HH:MM
+ * @param {string} endOfDay - время окончания рабочего дня в формате HH:MM
+ * @param {string} meetingStart - время начала мероприятия в формате HH:MM
+ * @param {number} meetingDuration - длительность мероприятия в минутах
+ * @return {boolean} - true, если встреча укладывается в рабочий день
+ */
+const isMeetingWithinWorkday = (startOfDay, endOfDay, meetingStart, meetingDuration) => {
+  const startOfDayMinutes = timeToMinutes(startOfDay);
+  const endOfDayMinutes = timeToMinutes(endOfDay);
+  const meetingStartMinutes = timeToMinutes(meetingStart);
+  const meetingEndMinutes = meetingStartMinutes + meetingDuration;
+
+  return meetingStartMinutes >= startOfDayMinutes && meetingEndMinutes <= endOfDayMinutes;
+};
+
+// eslint-disable-next-line no-console
+console.log(checkWordLength('hello', 5)); // true
+// eslint-disable-next-line no-console
+console.log(isPalindrome('hello')); // false
+// eslint-disable-next-line no-console
+console.log(getNumber('123')); //123
+// eslint-disable-next-line no-console
+console.log(isMeetingWithinWorkday('08:00', '17:30', '14:00', 90)); //`true`
