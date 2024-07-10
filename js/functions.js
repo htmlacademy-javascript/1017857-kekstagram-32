@@ -41,36 +41,38 @@ const getNumber = (value) => {
 
 
 /**
- * Генератор случайных положительных чисел
- * @param {number} a - первое число
- * @param {number} b - второе число
- * @return {number | false} - Возвращает целое положительное число или false, если введены не верные значения
+ * Функция для преобразования времени в минуты.
+ * @param {string} time - время в формате HH:MM
+ * @return {*} - результат преобразования времени в минуты
  */
-const generateRandomNumber = (a, b) => {
-  const minNumber = Math.min(a, b);
-  const maxNumber = Math.max(a, b);
-  if (minNumber < 0 || maxNumber < 0 || minNumber > maxNumber || isNaN(minNumber) || isNaN(maxNumber)) {
-    return false;
-  }
-  return Math.floor(Math.random() * (maxNumber - minNumber + 1)) + minNumber;
+const timeToMinutes = (time) => {
+  const [hours, minutes] = time.split(':').map(Number);
+  return hours * 60 + minutes;
 };
 
 
 /**
- * Генератор случайных уникальных чисел
- * @param {number} min - минимальное число
- * @param {number} max - максимальное число
- * @return {(function(): (number))} - Возвращает функцию, которая генерирует случайное уникальное число
+ * Функция проверяет, входит ли встреча в рабочий день
+ * @param {string} startOfDay - время начала рабочего дня в формате HH:MM
+ * @param {string} endOfDay - время окончания рабочего дня в формате HH:MM
+ * @param {string} meetingStart - время начала мероприятия в формате HH:MM
+ * @param {number} meetingDuration - длительность мероприятия в минутах
+ * @return {boolean} - true, если встреча укладывается в рабочий день
  */
-const generateRandomUniqNumber = (min, max) => {
-  const array = Array.from({ length: max }, (_, index) => index + min);
+const isMeetingWithinWorkday = (startOfDay, endOfDay, meetingStart, meetingDuration) => {
+  const startOfDayMinutes = timeToMinutes(startOfDay);
+  const endOfDayMinutes = timeToMinutes(endOfDay);
+  const meetingStartMinutes = timeToMinutes(meetingStart);
+  const meetingEndMinutes = meetingStartMinutes + meetingDuration;
 
-  return function () {
-    const rndIndex = generateRandomNumber(0, array.length - 1);
-    const currentValue = array[rndIndex];
-    array.splice(rndIndex, 1);
-    return currentValue;
-  };
+  return meetingStartMinutes >= startOfDayMinutes && meetingEndMinutes <= endOfDayMinutes;
 };
 
-export {checkWordLength, isPalindrome, getNumber, generateRandomNumber, generateRandomUniqNumber};
+// eslint-disable-next-line no-console
+console.log(checkWordLength('hello', 5)); // true
+// eslint-disable-next-line no-console
+console.log(isPalindrome('hello')); // false
+// eslint-disable-next-line no-console
+console.log(getNumber('123')); //123
+// eslint-disable-next-line no-console
+console.log(isMeetingWithinWorkday('08:00', '17:30', '14:00', 90)); //`true`
