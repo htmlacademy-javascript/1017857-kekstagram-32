@@ -1,4 +1,4 @@
-import {generateRandomNumber, generateRandomUniqNumber} from './utils.js';
+import {generateRandomNumber, generateRandomUniqNumber} from './utils.mjs';
 
 const COMMENTS = [
   'Всё отлично!',
