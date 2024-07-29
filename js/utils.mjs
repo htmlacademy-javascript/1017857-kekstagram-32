@@ -31,4 +31,11 @@ const generateRandomUniqNumber = (min, max) => {
   };
 };
 
-export {generateRandomNumber, generateRandomUniqNumber};
+/**
+ * Проверка на нажатие кнопки Esc
+ * @param {object} evt - объект события
+ * @return {boolean} true, если нажата кнопка Esc
+ */
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {generateRandomNumber, generateRandomUniqNumber, isEscapeKey};

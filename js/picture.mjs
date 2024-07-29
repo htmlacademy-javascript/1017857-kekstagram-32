@@ -1,3 +1,5 @@
+import {openBigPicture} from './big-picture.mjs';
+
 const pictureListElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const pictureListFragment = document.createDocumentFragment();
@@ -12,6 +14,9 @@ const createPicture = (pictureData) => {
   pictureElement.querySelector('.picture__img').setAttribute('alt', pictureData.description);
   pictureElement.querySelector('.picture__comments').textContent = pictureData.comments.length;
   pictureElement.querySelector('.picture__likes').textContent = pictureData.likes;
+  pictureElement.addEventListener('click', () => {
+    openBigPicture(pictureData);
+  })
   pictureListFragment.appendChild(pictureElement);
 };
 
