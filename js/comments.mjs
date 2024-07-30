@@ -1,7 +1,9 @@
+const SHOW_COMMENT_COUNT = 5;
 const social = document.querySelector('.social');
 const commentListElement = social.querySelector('.social__comments');
 const commentItemTemplate = commentListElement.querySelector('.social__comment');
-const commentsListFragment = document.createDocumentFragment();
+const commentsLoader = social.querySelector('.comments-loader');
+let commentsList = [];
 
 /**
  * Функция очистки списка комментариев
@@ -29,8 +31,33 @@ const createCommentItem = (commentData) => {
  */
 const createCommentList = (commentsData) => {
   commentsData.forEach((item) => {
-    commentsListFragment.append(createCommentItem(item));
+    commentsList.push(createCommentItem(item));
   });
+};
+
+/**
+ * Функция отображает количество показанных комментариев
+ */
+const showCommentCount = () => {
+  console.log(commentListElement.childElementCount);
+  social.querySelector('.social__comment-shown-count').innerHTML = commentListElement.childElementCount;
+};
+
+/**
+ * Функция возвращает фрагмент с заданным количеством комментариев
+ * @param {array} commentElementList - массив комментариев
+ * @param {number} commentsCount - количество комментариев
+ * @return {Node} фрагмент с комментариями
+ */
+const getNextComments = (commentElementList, commentsCount) => {
+  const nextCommentsFragment = document.createDocumentFragment();
+  for (let i = 0; i < commentsCount; i++) {
+    if (commentElementList.length === 0) {
+      break;
+    }
+    nextCommentsFragment.append(commentElementList.shift());
+  }
+  return nextCommentsFragment;
 };
 
 /**
@@ -38,9 +65,24 @@ const createCommentList = (commentsData) => {
  * @param {Array} commentsData - Список комментариев к фотографии
  */
 const modifyCommentList = (commentsData) => {
+  commentsList = [];
   clearComments();
+  social.querySelector('.social__comment-total-count').textContent = commentsData.length;
+  commentsLoader.classList.remove('hidden');
   createCommentList(commentsData);
-  commentListElement.append(commentsListFragment);
+  commentListElement.append(getNextComments(commentsList, SHOW_COMMENT_COUNT));
+  showCommentCount();
 };
+
+/**
+ * Обработчик события 'click' по кнопке 'загрузить еще'
+ */
+commentsLoader.addEventListener('click', () => {
+  commentListElement.append(getNextComments(commentsList, SHOW_COMMENT_COUNT));
+  showCommentCount();
+  if (commentsList.length === 0) {
+    commentsLoader.classList.add('hidden');
+  }
+});
 
 export {modifyCommentList};
