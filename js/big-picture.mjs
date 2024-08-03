@@ -4,8 +4,6 @@ import {modifyCommentList} from './comments.mjs';
 const bodyElement = document.querySelector('body');
 const bigPictureElement = document.querySelector('.big-picture');
 const closeBigPictureElement = bigPictureElement.querySelector('#picture-cancel');
-const socialCommentsCountElement = bigPictureElement.querySelector('.social__comment-count');
-const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
 
 /**
  * Функция выводит большое изображение на основе полученных данных
@@ -16,8 +14,6 @@ const modifyBigPicture = (photoData) => {
   bigPictureElement.querySelector('.likes-count').textContent = photoData.likes;
   bigPictureElement.querySelector('.social__caption').textContent = photoData.description;
   modifyCommentList(photoData.comments);
-  socialCommentsCountElement.classList.add('hidden');
-  commentsLoaderElement.classList.add('hidden');
 };
 
 /**
