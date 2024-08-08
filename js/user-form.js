@@ -1,4 +1,5 @@
-import {addEffectLevelSliderClickUpdateHandler} from './effect.js';
+import {addScaleClickHandler} from './scale';
+import {addEffectUpdateHandler} from './effect.js';
 import {isValidComment} from './comment-validation.js';
 import {openUserForm, addEventListenersToForm, closeUserForm} from './user-modal.js';
 
@@ -32,7 +33,8 @@ const addFileChooserChangeHandler = () => {
  * Функция добавляет обработчики событий: изменение диапазона значений эффекта, отправку пользовательской формы, изменения загружаемого изображения
  */
 const addUserFormHandler = () => {
-  addEffectLevelSliderClickUpdateHandler(userPicture);
+  addScaleClickHandler(userPicture);
+  addEffectUpdateHandler(userPicture);
   addUserFormSubmitHandler();
   addEventListenersToForm();
   addFileChooserChangeHandler();

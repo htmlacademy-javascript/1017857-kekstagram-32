@@ -1,5 +1,6 @@
 import {isEscapeKey} from './utils.mjs';
 import {resetEffect} from './effect.js';
+import {resetScale} from './scale.js';
 import {resetMessageAndHashtagText, isValidComment} from './comment-validation.js';
 
 const imageUploadForm = document.querySelector('#upload-select-image');
@@ -28,7 +29,7 @@ const openUserForm = () => {
   userForm.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-
+  resetScale(userPicture);
   resetEffect(userPicture);
   isValidComment();
 };

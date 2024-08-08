@@ -35,6 +35,7 @@ const pristine = new Pristine(imageUploadFormElement, {
   errorTextTag: 'div',
 });
 
+/*---------Проверка сообщения-----------*/
 const userCommentElement = imageUploadFormElement.querySelector('.text__description');
 
 /**
@@ -66,8 +67,8 @@ const isValidCommentMessage = () => {
  */
 const getCommentErrorText = () => message.errorText;
 
-pristine.addValidator(userCommentElement, isValidCommentMessage, getCommentErrorText);
 
+/*---------Проверка хештегов-----------*/
 const hashtagElement = imageUploadFormElement.querySelector('.text__hashtags');
 
 /**
@@ -128,6 +129,8 @@ const validateHashtagInput = () => isCorrectHashtag() && isCorrectCountHashtag()
  * @return {string} возвращает сообщение об ошибке
  */
 const getErrorMessage = () => `${hashtagParam.count.errorText} ${hashtagParam.correct.errorText} ${hashtagParam.uniq.errorText}`;
+
+pristine.addValidator(userCommentElement, isValidCommentMessage, getCommentErrorText);
 pristine.addValidator(hashtagElement, validateHashtagInput, getErrorMessage);
 
 const isValidComment = () => pristine.validate();
