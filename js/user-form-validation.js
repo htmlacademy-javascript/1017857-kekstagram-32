@@ -123,8 +123,8 @@ const errorDataTemplate = document.querySelector('#data-error').content.querySel
 
 /**
  * Функция показывает сообщение при неудачной попытки получения данных с сервера
- * @param {string} message - сообщение об ошибке
- */
+ * @return {void} показывает сообщение об ошибке
+ * */
 const showAlert = () => {
   const errorDataElement = errorDataTemplate.cloneNode(true);
   document.body.append(errorDataElement);
