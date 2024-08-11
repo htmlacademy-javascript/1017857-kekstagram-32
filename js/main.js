@@ -1,9 +1,9 @@
-import {getData} from './api.mjs';
-import {createPictureList} from './picture.mjs';
-import {addUserFormHandler} from './user-form.mjs';
-import {showAlert} from './user-form-validation.mjs';
-import {debounce} from './utils.mjs';
-import {showImageFilters, addFilterDefaultButtonHandler, addFilterDiscussedButtonHandler, addFilterRandomButtonHandler} from './filters.mjs';
+import {getData} from './api.js';
+import {createPictureList} from './picture.js';
+import {addUserFormHandler} from './user-form.js';
+import {showAlert} from './user-form-validation.js';
+import {debounce} from './utils.js';
+import {showImageFilters, addFilterDefaultButtonHandler, addFilterDiscussedButtonHandler, addFilterRandomButtonHandler} from './filters.js';
 
 getData()
   .then((photosData) => {
@@ -14,7 +14,7 @@ getData()
     showImageFilters();
   })
   .catch(
-    (err) => {
+    () => {
       showAlert();
     }
   );

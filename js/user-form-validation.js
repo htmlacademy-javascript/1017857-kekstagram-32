@@ -1,6 +1,6 @@
-import {sendData} from './api.mjs';
-import {closeUserForm, onDocumentKeydown} from './user-modal.mjs';
-import {isEscapeKey} from './utils.mjs';
+import {sendData} from './api.js';
+import {closeUserForm, onDocumentKeydown} from './user-modal.js';
+import {isEscapeKey} from './utils.js';
 
 const ErrorMessages = {
   LONG_MESSAGE: 'Не более 140 символов.',

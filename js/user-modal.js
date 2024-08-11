@@ -1,6 +1,6 @@
-import {isEscapeKey} from './utils.mjs';
-import {resetEffect} from './effect.mjs';
-import {resetScale} from './scale.mjs';
+import {isEscapeKey} from './utils.js';
+import {resetEffect} from './effect.js';
+import {resetScale} from './scale.js';
 
 const imageUploadForm = document.querySelector('#upload-select-image');
 const userForm = document.querySelector('.img-upload__overlay');

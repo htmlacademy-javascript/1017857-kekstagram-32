@@ -1,4 +1,4 @@
-import {generateRandomUniqNumber} from './utils.mjs';
+import {generateRandomUniqNumber} from './utils.js';
 
 const RANDOM_MINIATURES_COUNT = 10;
 

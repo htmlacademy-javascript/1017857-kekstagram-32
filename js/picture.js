@@ -1,4 +1,4 @@
-import {openBigPicture} from './big-picture.mjs';
+import {openBigPicture} from './big-picture.js';
 
 const pictureListElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -27,7 +27,7 @@ const createPicture = (pictureData) => {
   pictureElement.querySelector('.picture__likes').textContent = pictureData.likes;
   pictureElement.addEventListener('click', () => {
     openBigPicture(pictureData);
-  })
+  });
   pictureListFragment.appendChild(pictureElement);
 };
 

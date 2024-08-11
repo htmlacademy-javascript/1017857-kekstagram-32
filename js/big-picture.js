@@ -1,5 +1,5 @@
-import {isEscapeKey} from './utils.mjs';
-import {modifyCommentList} from './comments.mjs';
+import {isEscapeKey} from './utils.js';
+import {modifyCommentList} from './comments.js';
 
 const bodyElement = document.querySelector('body');
 const bigPictureElement = document.querySelector('.big-picture');

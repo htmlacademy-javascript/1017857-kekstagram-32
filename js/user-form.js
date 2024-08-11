@@ -1,7 +1,7 @@
-import {addScaleClickHandler} from './scale.mjs';
-import {addEffectUpdateHandler} from './effect.mjs';
-import {addUserFormSubmitHandler} from './user-form-validation.mjs';
-import {openUserForm, addEventListenersToForm} from './user-modal.mjs';
+import {addScaleClickHandler} from './scale.js';
+import {addEffectUpdateHandler} from './effect.js';
+import {addUserFormSubmitHandler} from './user-form-validation.js';
+import {openUserForm, addEventListenersToForm} from './user-modal.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
