@@ -34,8 +34,22 @@ const generateRandomUniqNumber = (min, max) => {
 /**
  * Проверка на нажатие кнопки Esc
  * @param {object} evt - объект события
- * @return {boolean} true, если нажата кнопка Esc
+ * @return {boolean} true, если нажата кнопка Es
  */
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {generateRandomNumber, generateRandomUniqNumber, isEscapeKey};
+/**
+ * Функция устранения дребезга
+ * @param callback - колбэк функция
+ * @param {number} timeoutDelay - задержка в миллисекундах
+ * @return {(function(...[*]): void)|*}
+ */
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export {generateRandomNumber, generateRandomUniqNumber, isEscapeKey, debounce};

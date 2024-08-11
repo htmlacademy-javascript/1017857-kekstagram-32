@@ -1,10 +1,22 @@
-import {createPhotoData} from './data.mjs';
+import {getData} from './api.mjs';
 import {createPictureList} from './picture.mjs';
-import {addUserFormHandler} from './user-form.js';
+import {addUserFormHandler} from './user-form.mjs';
+import {showAlert} from './user-form-validation.mjs';
+import {debounce} from './utils.mjs';
+import {showImageFilters, addFilterDefaultButtonHandler, addFilterDiscussedButtonHandler, addFilterRandomButtonHandler} from './filters.mjs';
 
+getData()
+  .then((photosData) => {
+    createPictureList(photosData);
+    addFilterDefaultButtonHandler(photosData, debounce(createPictureList));
+    addFilterRandomButtonHandler(photosData, debounce(createPictureList));
+    addFilterDiscussedButtonHandler(photosData, debounce(createPictureList));
+    showImageFilters();
+  })
+  .catch(
+    (err) => {
+      showAlert();
+    }
+  );
 
-const PHOTOS_COUNT = 25;
-const photosData = Array.from({length: PHOTOS_COUNT}, createPhotoData);
-
-createPictureList(photosData);
 addUserFormHandler();

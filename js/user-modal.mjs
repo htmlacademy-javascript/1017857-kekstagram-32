@@ -1,14 +1,12 @@
 import {isEscapeKey} from './utils.mjs';
-import {resetEffect} from './effect.js';
-import {resetScale} from './scale.js';
-import {resetMessageAndHashtagText, isValidComment} from './comment-validation.js';
+import {resetEffect} from './effect.mjs';
+import {resetScale} from './scale.mjs';
 
 const imageUploadForm = document.querySelector('#upload-select-image');
 const userForm = document.querySelector('.img-upload__overlay');
 const userFormCancel = document.querySelector('#upload-cancel');
 const hashtagElement = imageUploadForm.querySelector('.text__hashtags');
 const userCommentElement = imageUploadForm.querySelector('.text__description');
-const uploadFileElement = document.querySelector('#upload-file');
 const userPicture = document.querySelector('.img-upload__preview img');
 
 /**
@@ -18,8 +16,6 @@ const closeUserForm = () => {
   userForm.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
-  uploadFileElement.value = '';
-  resetMessageAndHashtagText();
 };
 
 /**
@@ -31,7 +27,6 @@ const openUserForm = () => {
   document.addEventListener('keydown', onDocumentKeydown);
   resetScale(userPicture);
   resetEffect(userPicture);
-  isValidComment();
 };
 
 /**
