@@ -109,7 +109,7 @@ const resetEffect = (userPicture) => {
  * Функция добавляет обработчики события на обновление значения эффекта и выбора эффекта
  * @param {Node} userPicture - Пользовательское изображение к которому применяется эффект
  */
-const addEffectLevelSliderClickUpdateHandler = (userPicture) => {
+const addEffectUpdateHandler = (userPicture) => {
   effectLevelSliderElement.noUiSlider.on('update', () => {
     effectLevelElement.value = effectLevelSliderElement.noUiSlider.get();
     setFilter(userPicture, effectLevelElement.value);
@@ -136,4 +136,4 @@ const addEffectLevelSliderClickUpdateHandler = (userPicture) => {
   });
 };
 
-export {addEffectLevelSliderClickUpdateHandler, resetEffect};
+export {addEffectUpdateHandler, resetEffect};
