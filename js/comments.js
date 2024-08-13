@@ -67,10 +67,14 @@ const modifyCommentList = (commentsData) => {
   commentsList = [];
   clearComments();
   social.querySelector('.social__comment-total-count').textContent = commentsData.length;
-  commentsLoader.classList.remove('hidden');
   createCommentList(commentsData);
   commentListElement.append(getNextComments(commentsList, SHOW_COMMENT_COUNT));
   showCommentCount();
+  if (commentsList.length === 0) {
+    commentsLoader.classList.add('hidden');
+  } else {
+    commentsLoader.classList.remove('hidden');
+  }
 };
 
 /**

@@ -71,6 +71,7 @@ const effectLevelSliderElement = document.querySelector('.effect-level__slider')
 const effectLevelElement = document.querySelector('.effect-level__value');
 const effectSliderContainer = document.querySelector('.effect-level');
 const effectList = document.querySelector('.effects__list');
+
 let currentFilter = effects.none.name;
 
 noUiSlider.create(effectLevelSliderElement, {
@@ -81,7 +82,19 @@ noUiSlider.create(effectLevelSliderElement, {
   start: effects.none.start,
   step: effects.none.step,
   connect: effects.none.connect,
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
 });
+
 
 /**
  * Функция для устанавливает стиль эффекта

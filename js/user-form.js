@@ -7,7 +7,7 @@ const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const fileChooser = document.querySelector('#upload-file');
 const userPicture = document.querySelector('.img-upload__preview img');
-
+const previewListElement = document.querySelectorAll('.effects__preview');
 
 /**
 * Функция добавляет обработчики событий: изменение масштаба, изменение диапазона значений эффекта, отправку пользовательской формы, изменения загружаемого изображения
@@ -25,6 +25,11 @@ const addUserFormHandler = () => {
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
     if (matches) {
       userPicture.src = URL.createObjectURL(file);
+      previewListElement.forEach((previewElement) => {
+        previewElement.style.backgroundImage = `url(${userPicture.src})`;
+      });
+
+      // console.log(userPicture.src);
     }
   });
 };

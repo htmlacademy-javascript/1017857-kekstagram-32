@@ -7,7 +7,7 @@ const pictureListFragment = document.createDocumentFragment();
 /**
  * Функция удаляет список комментариев под фото
  */
-const resetMPictureList = () => {
+const resetPictureList = () => {
   const miniatures = pictureListElement.querySelectorAll('.picture');
   miniatures.forEach((miniature) => {
     miniature.remove();
@@ -19,7 +19,7 @@ const resetMPictureList = () => {
  * @param {Object} pictureData - объект с данными изображения
  */
 const createPicture = (pictureData) => {
-  resetMPictureList();
+  resetPictureList();
   const pictureElement = pictureTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').setAttribute('src', pictureData.url);
   pictureElement.querySelector('.picture__img').setAttribute('alt', pictureData.description);
