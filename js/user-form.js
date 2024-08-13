@@ -1,43 +1,33 @@
-import {addScaleClickHandler} from './scale';
+import {addScaleClickHandler} from './scale.js';
 import {addEffectUpdateHandler} from './effect.js';
-import {isValidComment} from './comment-validation.js';
-import {openUserForm, addEventListenersToForm, closeUserForm} from './user-modal.js';
+import {addUserFormSubmitHandler} from './user-form-validation.js';
+import {openUserForm, addEventListenersToForm} from './user-modal.js';
+
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 
 const fileChooser = document.querySelector('#upload-file');
 const userPicture = document.querySelector('.img-upload__preview img');
-const imageUploadForm = document.querySelector('#upload-select-image');
+
 
 /**
- * Функция добавляет обработчик события на отправку формы
- */
-const addUserFormSubmitHandler = () => {
-  imageUploadForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    if (isValidComment()) {
-      closeUserForm();
-    }
-  });
-};
-
-/**
- * Функция добавляет обработчик события на изменения загружаемого изображения
- */
-const addFileChooserChangeHandler = () => {
-  fileChooser.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    openUserForm();
-  });
-};
-
-/**
- * Функция добавляет обработчики событий: изменение диапазона значений эффекта, отправку пользовательской формы, изменения загружаемого изображения
- */
+* Функция добавляет обработчики событий: изменение масштаба, изменение диапазона значений эффекта, отправку пользовательской формы, изменения загружаемого изображения
+*/
 const addUserFormHandler = () => {
   addScaleClickHandler(userPicture);
   addEffectUpdateHandler(userPicture);
   addUserFormSubmitHandler();
   addEventListenersToForm();
-  addFileChooserChangeHandler();
+
+  fileChooser.addEventListener('change', () => {
+    openUserForm();
+    const file = fileChooser.files[0];
+    const fileName = file.name.toLowerCase();
+    const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+    if (matches) {
+      userPicture.src = URL.createObjectURL(file);
+    }
+  });
 };
 
 export {addUserFormHandler};
+

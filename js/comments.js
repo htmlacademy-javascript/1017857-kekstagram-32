@@ -39,7 +39,6 @@ const createCommentList = (commentsData) => {
  * Функция отображает количество показанных комментариев
  */
 const showCommentCount = () => {
-  console.log(commentListElement.childElementCount);
   social.querySelector('.social__comment-shown-count').innerHTML = commentListElement.childElementCount;
 };
 
