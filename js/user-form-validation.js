@@ -244,4 +244,8 @@ function onDocumentWithUploadErrorClickAndKeydown(evt) {
   }
 }
 
-export {addUserFormSubmitHandler, showAlert};
+const resetErrorMessage = () => {
+  pristine.reset();
+};
+
+export {addUserFormSubmitHandler, showAlert, resetErrorMessage};

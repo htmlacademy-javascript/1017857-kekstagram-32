@@ -1,6 +1,7 @@
 import {isEscapeKey} from './utils.js';
 import {resetEffect} from './effect.js';
 import {resetScale} from './scale.js';
+import {resetErrorMessage} from './user-form-validation';
 
 const imageUploadForm = document.querySelector('#upload-select-image');
 const userForm = document.querySelector('.img-upload__overlay');
@@ -16,6 +17,8 @@ const closeUserForm = () => {
   userForm.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  imageUploadForm.reset();
+  resetErrorMessage();
 };
 
 /**
