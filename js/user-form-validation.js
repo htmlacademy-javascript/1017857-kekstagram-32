@@ -44,6 +44,7 @@ const pristine = new Pristine(imageUploadForm, {
 });
 
 const ALERT_SHOW_TIME = 5000;
+const REGEXP = /^#[a-zA-Zа-яА-Яё0-9]{1,19}$/;
 
 /**
  * Функция проверяет комментарий на максимальное количество символов
@@ -62,10 +63,7 @@ const hashtagElement = imageUploadForm.querySelector('.text__hashtags');
  * @param {string} word - проверяемое слов
  * @return {boolean} true, если слова является хештегом
  */
-const isHashtag = (word) => {
-  const regexp = /^#[a-zA-Zа-яА-Яё0-9]{1,19}$/;
-  return regexp.test(word);
-};
+const isHashtag = (word) => REGEXP.test(word);
 
 /**
  * Функция создает массив хештегов из введенных пользователем данных
@@ -98,7 +96,7 @@ const isCorrectCountHashtag = () => {
  * @return {boolean} true, если хештеги не повторяются
  */
 const isUniqHashtag = () => {
-  const makeUniq = (arr) => [...new Set(arr)];
+  const makeUniq = (hashtags) => [...new Set(hashtags)];
   hashtag.uniq.isCorrect = makeUniq(getHashtags()).length === getHashtags().length;
   hashtag.uniq.errorText = !hashtag.uniq.isCorrect ? ErrorMessages.DUPLICATE_HASHTAG : '';
   return hashtag.uniq.isCorrect;
@@ -161,8 +159,8 @@ const successFragment = document.createDocumentFragment();
  */
 const openUploadSuccess = () => {
   const successElement = successTemplate.cloneNode(true);
-  document.addEventListener('keydown', onDocumentWithUploadSuccessClickAndKeydown);
-  document.addEventListener('click', onDocumentWithUploadSuccessClickAndKeydown);
+  document.addEventListener('keydown', onSuccessButtonClick);
+  document.addEventListener('click', onSuccessButtonClick);
   successFragment.append(successElement);
   bodyElement.append(successFragment);
 };
@@ -172,8 +170,8 @@ const openUploadSuccess = () => {
  */
 const closeUploadSuccess = () => {
   document.querySelector('.success').remove();
-  document.removeEventListener('keydown', onDocumentWithUploadSuccessClickAndKeydown);
-  document.removeEventListener('click', onDocumentWithUploadSuccessClickAndKeydown);
+  document.removeEventListener('keydown', onSuccessButtonClick);
+  document.removeEventListener('click', onSuccessButtonClick);
 };
 
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
@@ -184,8 +182,8 @@ const errorFragment = document.createDocumentFragment();
  */
 const openUploadError = () => {
   const errorElement = errorTemplate.cloneNode(true);
-  document.addEventListener('keydown', onDocumentWithUploadErrorClickAndKeydown);
-  document.addEventListener('click', onDocumentWithUploadErrorClickAndKeydown);
+  document.addEventListener('keydown', onErrorButtonClick);
+  document.addEventListener('click', onErrorButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
   errorFragment.append(errorElement);
   bodyElement.append(errorFragment);
@@ -196,8 +194,8 @@ const openUploadError = () => {
  */
 const closeUploadError = () => {
   document.querySelector('.error').remove();
-  document.removeEventListener('keydown', onDocumentWithUploadErrorClickAndKeydown);
-  document.removeEventListener('click', onDocumentWithUploadErrorClickAndKeydown);
+  document.removeEventListener('keydown', onErrorButtonClick);
+  document.removeEventListener('click', onErrorButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
@@ -226,7 +224,7 @@ const addUserFormSubmitHandler = () => {
  * Обработчик события на закрытие сообщения об успешной отправке данных по кнопке Enter и клику
  * @param {Object} evt - Объект события
  */
-function onDocumentWithUploadSuccessClickAndKeydown(evt) {
+function onSuccessButtonClick(evt) {
   if (isEscapeKey(evt) || evt.target.className === 'success' || evt.target.className === 'success__button') {
     evt.preventDefault();
     closeUploadSuccess();
@@ -237,7 +235,7 @@ function onDocumentWithUploadSuccessClickAndKeydown(evt) {
  * Обработчик события на закрытие сообщения при неудачной попытке отправки данных по кнопке Enter и клику
  * @param {Object} evt - Объект события
  */
-function onDocumentWithUploadErrorClickAndKeydown(evt) {
+function onErrorButtonClick(evt) {
   if (isEscapeKey(evt) || evt.target.className === 'error' || evt.target.className === 'error__button') {
     evt.preventDefault();
     closeUploadError();

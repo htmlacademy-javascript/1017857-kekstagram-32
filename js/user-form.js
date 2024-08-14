@@ -28,8 +28,6 @@ const addUserFormHandler = () => {
       previewListElement.forEach((previewElement) => {
         previewElement.style.backgroundImage = `url(${userPicture.src})`;
       });
-
-      // console.log(userPicture.src);
     }
   });
 };

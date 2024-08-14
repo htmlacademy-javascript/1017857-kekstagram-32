@@ -1,12 +1,12 @@
 /**
  * Генератор случайных положительных чисел
- * @param {number} a - первое число
- * @param {number} b - второе число
+ * @param {number} firstNumber - первое число
+ * @param {number} secondNumber - второе число
  * @return {number | false} - Возвращает целое положительное число или false, если введены не верные значения
  */
-const generateRandomNumber = (a, b) => {
-  const minNumber = Math.min(a, b);
-  const maxNumber = Math.max(a, b);
+const generateRandomNumber = (firstNumber, secondNumber) => {
+  const minNumber = Math.min(firstNumber, secondNumber);
+  const maxNumber = Math.max(firstNumber, secondNumber);
   if (minNumber < 0 || maxNumber < 0 || minNumber > maxNumber || isNaN(minNumber) || isNaN(maxNumber)) {
     return false;
   }
@@ -21,12 +21,12 @@ const generateRandomNumber = (a, b) => {
  * @return {(function(): (number))} - Возвращает функцию, которая генерирует случайное уникальное число
  */
 const generateRandomUniqNumber = (min, max) => {
-  const array = Array.from({ length: max }, (_, index) => index + min);
+  const arrayNumbers = Array.from({ length: max }, (_, index) => index + min);
 
   return function () {
-    const rndIndex = generateRandomNumber(0, array.length - 1);
-    const currentValue = array[rndIndex];
-    array.splice(rndIndex, 1);
+    const rndIndex = generateRandomNumber(0, arrayNumbers.length - 1);
+    const currentValue = arrayNumbers[rndIndex];
+    arrayNumbers.splice(rndIndex, 1);
     return currentValue;
   };
 };
