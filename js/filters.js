@@ -34,7 +34,7 @@ const filterRandomMiniatures = (miniatures, count) => {
  */
 const filterDiscussedMiniatures = (miniatures) => {
   const sortedMiniatures = miniatures.slice();
-  sortedMiniatures.sort((a, b) => a.comments.length > b.comments.length ? -1 : 1);
+  sortedMiniatures.sort((commentOne, commentTwo) => commentOne.comments.length > commentTwo.comments.length ? -1 : 1);
   return sortedMiniatures;
 };
 
